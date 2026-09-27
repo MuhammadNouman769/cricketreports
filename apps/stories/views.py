@@ -65,10 +65,12 @@ def index_view(request):
     banner_stories = Story.objects.filter(
         status='published'
     ).select_related('author').prefetch_related('tags').order_by('-created_at')[:3]
+
     trending_stories = Story.objects.filter(
         status='published',
         post_type='trending'
     ).order_by('-published_at')[:10]
+
     context = {
         'banner_stories': banner_stories,
         'trending_stories': trending_stories,
