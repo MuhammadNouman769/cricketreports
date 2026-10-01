@@ -63,7 +63,8 @@ def blog_detail(request, slug):
 def index_view(request):
     """View for the home/index page"""
     banner_stories = Story.objects.filter(
-        status='published'
+        status='published',
+        post_type='banner'
     ).select_related('author').prefetch_related('tags').order_by('-created_at')[:3]
 
     trending_stories = Story.objects.filter(
